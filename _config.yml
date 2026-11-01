@@ -1,14 +1,14 @@
 # ===========================================================
 #  Hexo 站点配置（Hexo 8.x）
-#  主题专属配置在同目录的 _config.next.yml 里
+#  主题：themes/kpmark（配置见 themes/kpmark/_config.yml）
 # ===========================================================
 
 # ---------- Site ----------
-title: 我的博客
+title: 木辛雨雯
 subtitle: ''
 description: ''
 keywords:
-author: Alexander
+author: 木辛雨雯
 language: zh-CN
 timezone: 'Asia/Shanghai'
 

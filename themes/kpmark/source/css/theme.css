@@ -704,3 +704,38 @@ footer.site {
   .content { font-size: 16px; line-height: 1.95; }
   .about-card { padding: 26px 22px; }
 }
+
+/* ---------- 首页引言行 + 社交图标 ---------- */
+.intro .line {
+  margin: 0 0 5px;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--ink-3);
+}
+
+.intro .line:first-of-type {
+  font-size: 21px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.intro .social {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 24px 0 0;
+}
+
+.intro .social a {
+  display: inline-flex;
+  color: var(--ink);
+  opacity: 0.82;
+  transition: color 0.2s, opacity 0.2s, transform 0.2s;
+}
+
+.intro .social a:hover {
+  color: var(--accent);
+  opacity: 1;
+  transform: translateY(-1px);
+}

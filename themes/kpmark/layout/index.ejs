@@ -2,19 +2,8 @@
 layout: base
 ---
 <%
-  function makeBrief(post) {
-    var raw = (post.excerpt && post.excerpt.trim().length > 0) ? post.excerpt : (post.content || '');
-    // 没写 <!-- more --> 时，取到第一个小标题为止，避免把正文结构全吸进摘要
-    if (!post.excerpt || post.excerpt.trim().length === 0) {
-      var cut = raw.search(/<h[2-6][\s>]/i);
-      if (cut > 0) raw = raw.slice(0, cut);
-    }
-    raw = raw
-      .replace(/<pre[\s\S]*?<\/pre>/gi, ' ')
-      .replace(/<figure[\s\S]*?<\/figure>/gi, ' ')
-      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style[\s\S]*?<\/style>/gi, ' ');
-    var text = strip_html(raw)
+  function plainText(html) {
+    return strip_html(html || '')
       .replace(/&nbsp;/g, ' ')
       .replace(/&quot;|&#34;/g, '"')
       .replace(/&#39;|&apos;/g, "'")
@@ -23,29 +12,47 @@ layout: base
       .replace(/&amp;/g, '&')
       .replace(/\s+/g, ' ')
       .trim();
+  }
+  function makeBrief(post) {
+    var raw = (post.excerpt && post.excerpt.trim().length > 0) ? post.excerpt : (post.content || '');
+    if (!post.excerpt || post.excerpt.trim().length === 0) {
+      var cut = raw.search(/<h[2-6][\s>]/i);
+      if (cut > 0) raw = raw.slice(0, cut);
+    }
+    var text = plainText(raw.replace(/<pre[\s\S]*?<\/pre>/gi, ' ').replace(/<figure[\s\S]*?<\/figure>/gi, ' '));
     return text.length > 130 ? text.slice(0, 130) + '…' : text;
   }
   function readTime(post) {
-    return Math.max(1, Math.round(strip_html(post.content || '').length / 300));
+    return Math.max(1, Math.round(plainText(post.content).length / 300));
+  }
+  function wordCount(post) {
+    return plainText(post.content).length;
   }
 %>
 
 <section class="intro">
-  <% if (theme.intro_status) { %>
-    <div class="status"><span class="dot"></span><span><%= theme.intro_status %></span></div>
-  <% } %>
-  <% if (theme.intro_lede) { %>
-    <p class="lede"><%= theme.intro_lede %></p>
-  <% } else if (config.description) { %>
-    <p class="lede"><%= config.description %></p>
+  <% (theme.intro_lines || []).forEach(function (line) { %>
+    <% if (line) { %><p class="line"><%= line %></p><% } %>
+  <% }); %>
+
+  <% if (theme.social) { %>
+    <div class="social">
+      <% Object.keys(theme.social).forEach(function (name) { %>
+        <% if (theme.social[name]) { %>
+          <a href="<%- theme.social[name] %>" title="<%= name %>" aria-label="<%= name %>"><%- partial('_partial/icon', { name: name }) %></a>
+        <% } %>
+      <% }); %>
+    </div>
   <% } %>
 
   <div class="filter-row">
     <div class="chips">
       <a class="chip active" href="<%- url_for('/') %>">全部</a>
-      <% site.categories.each(function (cat) { %>
-        <a class="chip" href="<%- url_for(cat.path) %>"><%= cat.name %></a>
-      <% }); %>
+      <% if (theme.show_category_chips !== false) { %>
+        <% site.categories.each(function (cat) { %>
+          <a class="chip" href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+        <% }); %>
+      <% } %>
     </div>
     <span class="note-count"><%= site.posts.length %> notes</span>
   </div>
@@ -66,7 +73,7 @@ layout: base
             <span class="read-hint">阅读 →</span>
           </div>
           <p class="excerpt"><%= makeBrief(post) %></p>
-          <div class="meta">预计阅读 <%= readTime(post) %> 分钟</div>
+          <div class="meta"><%= date(post.date, 'YYYY年M月D日') %> · <%= readTime(post) %> 分钟 · <%= wordCount(post) %> 字</div>
         </div>
       </a>
     </article>

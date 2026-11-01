@@ -1,6 +1,6 @@
 # 品牌
 avatar_initial: ""            # 头像圆里的字，留空取站点标题首字
-tagline: Personal Journal & Notes   # 站名下的斜体小字
+tagline: 笔记、杂谈和碎碎念      # 站名下的斜体小字
 
 # 顶部药丸导航
 nav:
@@ -13,9 +13,19 @@ nav:
   - label: 写文章
     url: /admin/
 
-# 首页引言（留空则不显示）
-intro_status: ""              # 例：近况：在读《枕草子》，听雨，写慢笔记
-intro_lede: "写点日常、读书笔记与偶发的胡思乱想。"   # 占位文案，随时改
+# 首页引言（每行一条，留空则不显示）
+intro_lines:
+  - 笔记、杂谈和碎碎念
+  - 欢迎通过 GitHub 或邮箱交流
+
+# 社交图标：github / mail / rss（留空则不显示该项）
+social:
+  github: https://github.com/Alexander-ap
+  mail: ""
+  rss: /atom.xml
+
+# 首页是否显示分类标签
+show_category_chips: true
 
 # 页脚
 city: 大连                    # 显示在文章末尾「写于 2026.11.01 · 大连」

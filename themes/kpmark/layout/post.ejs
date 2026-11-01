@@ -11,6 +11,8 @@ layout: base
     <time><%= date(page.date, 'YYYY.MM.DD') %></time>
     <span class="slash">/</span>
     <span><%= Math.max(1, Math.round(strip_html(page.content || '').length / 300)) %> 分钟阅读</span>
+    <span class="slash">/</span>
+    <span><%= strip_html(page.content || '').replace(/\s+/g, '').length %> 字</span>
   </div>
 
   <h1 class="post-title"><%= page.title %></h1>
