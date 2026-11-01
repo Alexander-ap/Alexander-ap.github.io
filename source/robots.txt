@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /search.xml
+
+Sitemap: https://alexander-ap.github.io/sitemap.xml

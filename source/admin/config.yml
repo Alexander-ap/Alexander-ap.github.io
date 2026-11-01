@@ -57,6 +57,16 @@ collections:
         required: false
         default: []
         hint: 每行一个，留空则归入「未分类」
+      - name: description
+        label: 摘要（用于搜索与分享）
+        widget: text
+        required: false
+        hint: 留空则自动截取正文前 110 字，用作搜索引擎与社交卡片的描述
+      - name: comments
+        label: 开启评论
+        widget: boolean
+        default: true
+        required: false
       - name: body
         label: 正文
         widget: markdown

@@ -6,13 +6,49 @@
   <% var siteTitle = config.title || 'Blog'; %>
   <% var docTitle = (typeof page !== 'undefined' && page && page.title) ? page.title + ' · ' + siteTitle : siteTitle; %>
   <title><%= docTitle %></title>
-  <% if (config.description) { %><meta name="description" content="<%= config.description %>"><% } %>
+  <%
+    // 摘要优先级：front-matter 的 description → 正文摘要 → 站点描述
+    var seoDesc = String((page && page.description) || '').trim();
+    if (!seoDesc) seoDesc = excerpt_text(page, 110);
+    if (!seoDesc) seoDesc = config.description || '';
+    seoDesc = seoDesc.replace(/\s+/g, ' ').trim();
+    if (seoDesc.length > 150) seoDesc = seoDesc.slice(0, 150) + '…';
+    // 去掉 index.html 后缀，canonical 与 og:url 用干净路径
+    var seoUrl = full_url_for(page.path).replace(/index\.html$/, '');
+  %>
+  <link rel="canonical" href="<%= seoUrl %>">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <%- open_graph({
+        url: seoUrl,
+        description: seoDesc,
+        type: is_post() ? 'article' : 'website',
+        twitter_card: 'summary'
+      }) %>
   <link rel="icon" href="<%- url_for('/images/favicon.svg') %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" media="print" onload="this.media='all'"
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
   <link rel="stylesheet" href="<%- url_for('/css/theme.css') %>">
+  <% if (is_post()) { %>
+  <script type="application/ld+json">
+  <%- JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: page.title,
+        datePublished: page.date.toISOString(),
+        dateModified: (page.updated || page.date).toISOString(),
+        description: seoDesc,
+        inLanguage: 'zh-CN',
+        mainEntityOfPage: { '@type': 'WebPage', '@id': seoUrl },
+        author: { '@type': 'Person', name: config.author },
+        publisher: { '@type': 'Organization', name: config.title },
+        keywords: (page.tags && page.tags.length)
+          ? page.tags.toArray().map(function (t) { return t.name; }).join(',')
+          : ''
+      }).replace(/<\//g, '<\\/') %>
+  </script>
+  <% } %>
 </head>
 <body>
   <div class="topline"></div>

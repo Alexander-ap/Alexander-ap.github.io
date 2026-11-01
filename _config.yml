@@ -6,8 +6,8 @@
 # ---------- Site ----------
 title: 木辛雨雯
 subtitle: ''
-description: ''
-keywords:
+description: 木辛雨雯的个人博客 —— 笔记、杂谈和碎碎念
+keywords: 木辛雨雯,个人博客,笔记,杂谈,Hexo
 author: 木辛雨雯
 language: zh-CN
 timezone: 'Asia/Shanghai'
@@ -53,10 +53,6 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
-prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
 
 # ---------- Category & Tag ----------
 default_category: uncategorized
@@ -79,6 +75,12 @@ search:
   field: post
   format: html
   limit: 10000
+
+# 站点地图（配合 hexo-generator-sitemap）
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
 
 # ---------- Deployment ----------
 # 网络和 GitHub 认证就绪后再填 git 那段，先留空不影响本地 generate / server
