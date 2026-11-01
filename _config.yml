@@ -82,6 +82,4 @@ sitemap:
   tags: true
 
 # ---------- Deployment ----------
-# 网络和 GitHub 认证就绪后再填 git 那段，先留空不影响本地 generate / server
-deploy:
-  type: ''
+# 部署由 .github/workflows/pages.yml 负责，push 到 main 即自动构建发布

@@ -99,6 +99,46 @@ city: 大连                  # 文章末尾「写于 2026.11.01 · 大连」
 
 站名本身在 `_config.yml` 的 `title`，头像圆里取站名首字（可用 `avatar_initial` 覆盖）。
 
+改了 `theme.css` 或 `theme.js` 之后，把 `asset_version` 加 1。GitHub Pages 走 CDN 缓存，不换版本号访客可能还看到旧样式。
+
+## 已实现的功能
+
+- **站内搜索**：点导航「搜索」，或按 `/`、`Ctrl/Cmd + K`。支持 ↑↓ 选择、Enter 打开、Esc 关闭
+- **文章目录**：正文上方，随滚动高亮当前小节
+- **代码块**：语言标签 + 复制按钮，带语法配色
+- **图片灯箱**：点击正文图片放大，Esc 关闭
+- **阅读进度**：顶部彩线随滚动填充
+- **相关文章**：按共享标签与分类推荐 3 篇，无相关则不显示
+- **首页标签筛选**：点标签直接搜全站同名文章，能跨分页
+- **SEO**：meta description、Open Graph、canonical、JSON-LD、sitemap.xml、robots.txt
+
+全部为原生实现，主题只加载一个约 14KB 的 `js/theme.js`，没有第三方库。
+
+字数口径统一为「去标签去空白、代码块不计」，阅读时长按 400 字/分钟。首页列表和文章页用的是同一套 helper（`themes/kpmark/scripts/helpers.js`），不会再出现两处数字不一致。
+
+## 开启评论（giscus）
+
+评论区默认关闭，需要你在 GitHub 侧做四步：
+
+1. 仓库 Settings → General → Features → 勾选 **Discussions**
+2. 安装 [giscus App](https://github.com/apps/giscus)，只授权这个仓库
+3. 仓库 Discussions 新建分类 `Comments`，类型选 **Announcements**（只有维护者能开新帖，防垃圾）
+4. 打开 [giscus.app](https://giscus.app)，仓库填 `Alexander-ap/Alexander-ap.github.io`，映射选 **pathname**，分类选 `Comments`，页面下方会给出 `data-repo-id` 与 `data-category-id`
+
+把这两个 id 填进 `themes/kpmark/_config.yml`：
+
+```yaml
+giscus:
+  repo_id: R_kgDOxxxxxxx
+  category_id: DIC_kwDOxxxxxxx
+```
+
+> `repo_id` 为空时评论区整块不渲染，没配好也不会出现空框；评论脚本是滚动到附近才加载的，不影响首屏速度。
+>
+> 永久链接含日期，改文章文件名会换 URL，已有评论会失联。如果打算在后台改标题或文件名，把 `giscus.mapping` 换成 `og:title`。
+>
+> 评论区的暖纸配色来自 `themes/kpmark/source/css/giscus-paper.css`（覆盖 GitHub Primer 变量），想调色改这里。
+
 ## 发布流程
 
 ```

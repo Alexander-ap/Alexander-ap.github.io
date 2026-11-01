@@ -2,6 +2,10 @@
 avatar_initial: ""            # 头像圆里的字，留空取站点标题首字
 tagline: 笔记、杂谈和碎碎念      # 站名下的斜体小字
 
+# 静态资源版本号：每次改 theme.css / theme.js 后 +1
+# GitHub Pages 有 CDN 缓存，不换版本号访客可能看到旧样式
+asset_version: 2
+
 # 顶部药丸导航
 nav:
   - label: 文章
