@@ -19,6 +19,7 @@ favicon:
 # 格式：路径 || 图标（NexT 8 用 Font Awesome 5 写法）
 menu:
   home: / || fa fa-home
+  写文章: /admin/ || fa fa-pen
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
   archives: /archives/ || fa fa-archive
