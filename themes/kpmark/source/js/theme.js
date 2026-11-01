@@ -444,6 +444,34 @@
     });
   }
 
+  /* 评论：滚到附近才注入 giscus，首屏不受第三方脚本影响 */
+
+  function initComments() {
+    var slot = $('.giscus-slot');
+    if (!slot) return;
+
+    function load() {
+      if (slot.getAttribute('data-loaded')) return;
+      slot.setAttribute('data-loaded', '1');
+      var s = doc.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      slice.call(slot.attributes).forEach(function (attr) {
+        if (attr.name.indexOf('data-') === 0) s.setAttribute(attr.name, attr.value);
+      });
+      slot.appendChild(s);
+    }
+
+    if (!('IntersectionObserver' in window)) { load(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { load(); io.disconnect(); }
+      });
+    }, { rootMargin: '200px' });
+    io.observe(slot);
+  }
+
   /* 启动 */
 
   function boot() {
@@ -453,6 +481,7 @@
     initLightbox();
     initReadbar();
     initTagFilter();
+    initComments();
   }
 
   if (doc.readyState === 'loading') {

@@ -1,0 +1,50 @@
+/*
+ * giscus 自定义主题：把 GitHub Primer 的灰白映射到 kpmark 的暖纸配色。
+ * 由主题配置 giscus.theme 指向本文件（giscus 无内置暖色主题，只能这样覆盖）。
+ * 变量名取自 Primer primitives，改动时以 giscus 实际渲染为准。
+ */
+
+:root {
+  --color-canvas-default: #f5f1e9;
+  --color-canvas-overlay: #f5f1e9;
+  --color-canvas-inset: #efe9dd;
+  --color-canvas-subtle: #ece6da;
+
+  --color-border-default: #e6dfd1;
+  --color-border-muted: #ece6da;
+  --color-neutral-muted: rgba(236, 230, 218, 0.6);
+
+  --color-fg-default: #22211f;
+  --color-fg-muted: #7c7870;
+  --color-fg-subtle: #8c877e;
+
+  --color-accent-fg: #d94a24;
+  --color-accent-emphasis: #f05a32;
+  --color-accent-muted: rgba(240, 90, 50, 0.2);
+  --color-accent-subtle: rgba(240, 90, 50, 0.1);
+
+  --color-btn-text: #22211f;
+  --color-btn-bg: #ece6da;
+  --color-btn-border: #e6dfd1;
+  --color-btn-hover-bg: #e6dfd1;
+  --color-btn-hover-border: #d9d2c4;
+  --color-btn-primary-text: #f5f1e9;
+  --color-btn-primary-bg: #22211f;
+  --color-btn-primary-hover-bg: #2f2d2a;
+  --color-btn-primary-border: #22211f;
+
+  --color-danger-fg: #c0392b;
+  --color-success-fg: #5b7a4a;
+}
+
+/* 圆角与字体跟随站点风格 */
+.gsc-comment-box,
+.gsc-comment,
+.gsc-reply {
+  border-radius: 12px;
+}
+
+.gsc-comment-content,
+.gsc-comment-box-textarea {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+}

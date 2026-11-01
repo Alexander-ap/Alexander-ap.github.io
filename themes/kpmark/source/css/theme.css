@@ -1069,3 +1069,42 @@ body.is-locked { overflow: hidden; }
 
 /* 首页标签筛选行 */
 .chips-tags { margin-top: 10px; }
+
+/* ==========================================================
+   版权声明 / 相关文章 / 评论区
+   ========================================================== */
+.post-license {
+  margin-top: 26px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line-strong);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--ink-4);
+}
+
+.post-license p { margin: 0; }
+.post-license a { color: var(--ink-3); }
+.post-license a:hover { color: var(--accent); }
+
+.related { margin-top: 42px; }
+
+.related-title,
+.comments-title {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.comments {
+  margin-top: 44px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.comments-title { font-size: 17px; }
+
+.giscus-slot { margin-top: 6px; }

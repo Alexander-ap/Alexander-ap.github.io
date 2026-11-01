@@ -33,3 +33,19 @@ show_category_chips: true
 
 # 页脚
 city: 大连                    # 显示在文章末尾「写于 2026.11.01 · 大连」
+
+# 首页是否显示标签筛选行
+show_tag_chips: true
+
+# giscus 评论（https://giscus.app）
+# repo_id / category_id 留空则整块不渲染，站点不会出现空框
+# 取值步骤见 README：仓库开启 Discussions → 装 giscus App → 建 Comments 分类 → giscus.app 生成
+giscus:
+  repo: Alexander-ap/Alexander-ap.github.io
+  repo_id: ''
+  category: Comments
+  category_id: ''
+  mapping: pathname          # pathname / og:title / url
+  reactions: '1'
+  theme: /css/giscus-paper.css   # 指向本地暖纸配色；以 / 开头会自动转成绝对地址
+  lang: zh-CN

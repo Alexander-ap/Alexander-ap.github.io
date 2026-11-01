@@ -40,6 +40,13 @@ layout: base
     <span class="thanks">Thanks for reading.</span>
   </div>
 
+  <% if (page.copyright !== false) { %>
+    <div class="post-license">
+      <p>本文作者 <a href="<%- url_for('/about/') %>"><%= config.author %></a>，首发于 <a href="<%- full_url_for(page.path) %>"><%= config.title %></a>。</p>
+      <p>采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可，转载请注明出处。</p>
+    </div>
+  <% } %>
+
   <div class="post-nav">
     <% if (page.prev) { %>
       <a class="nav-card" href="<%- url_for(page.prev.path) %>">
@@ -54,4 +61,42 @@ layout: base
       </a>
     <% } %>
   </div>
+
+  <% var related = related_posts(page, 3); %>
+  <% if (related.length) { %>
+    <section class="related">
+      <h2 class="related-title">相关内容</h2>
+      <ul class="plain-list">
+        <% related.forEach(function (p) { %>
+          <li>
+            <span class="d"><%= date(p.date, 'YYYY.MM.DD') %></span>
+            <a href="<%- url_for(p.path) %>"><%= p.title %></a>
+          </li>
+        <% }); %>
+      </ul>
+    </section>
+  <% } %>
 </article>
+
+<% if (page.comments !== false && theme.giscus && theme.giscus.repo_id && theme.giscus.category_id) { %>
+  <%
+    var giscusTheme = theme.giscus.theme || 'light';
+    if (giscusTheme.charAt(0) === '/') giscusTheme = full_url_for(giscusTheme);
+  %>
+  <section class="comments" id="comments">
+    <h2 class="comments-title">留言</h2>
+    <div class="giscus-slot"
+         data-repo="<%= theme.giscus.repo %>"
+         data-repo-id="<%= theme.giscus.repo_id %>"
+         data-category="<%= theme.giscus.category || 'Comments' %>"
+         data-category-id="<%= theme.giscus.category_id %>"
+         data-mapping="<%= theme.giscus.mapping || 'pathname' %>"
+         data-strict="0"
+         data-reactions-enabled="<%= theme.giscus.reactions || '1' %>"
+         data-emit-metadata="0"
+         data-input-position="top"
+         data-theme="<%= giscusTheme %>"
+         data-lang="<%= theme.giscus.lang || 'zh-CN' %>"
+         data-loading="lazy"></div>
+  </section>
+<% } %>
