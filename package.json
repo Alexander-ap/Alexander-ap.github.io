@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "0.0.0",
   "private": true,
-  "description": "Hexo + NexT blog for GitHub Pages",
+  "description": "木辛雨雯的个人博客 · Hexo 8 + kpmark 主题 · GitHub Pages",
   "hexo": {
     "version": "8.1.2"
   },
@@ -25,7 +25,6 @@
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^7.0.1",
     "hexo-renderer-stylus": "^3.0.1",
-    "hexo-server": "^3.0.0",
-    "hexo-theme-next": "^8.29.1"
+    "hexo-server": "^3.0.0"
   }
 }

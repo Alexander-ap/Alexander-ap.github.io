@@ -1,0 +1,5 @@
+# 统一换行符，避免 Windows 本地与 Ubuntu CI 之间产生无意义的 diff
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.svg text
