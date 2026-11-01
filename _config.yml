@@ -1,0 +1,85 @@
+# ===========================================================
+#  Hexo 站点配置（Hexo 8.x）
+#  主题专属配置在同目录的 _config.next.yml 里
+# ===========================================================
+
+# ---------- Site ----------
+title: 我的博客
+subtitle: ''
+description: ''
+keywords:
+author: Alexander
+language: zh-CN
+timezone: 'Asia/Shanghai'
+
+# ---------- URL ----------
+# 部署到 GitHub Pages 后改成 https://<你的用户名>.github.io
+url: https://alexander-ap.github.io
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# ---------- Directory ----------
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# ---------- Writing ----------
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# ---------- Category & Tag ----------
+default_category: uncategorized
+category_map:
+tag_map:
+
+# ---------- Date / Time ----------
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# ---------- Pagination ----------
+per_page: 10
+pagination_dir: page
+
+# ---------- Extensions ----------
+theme: next
+
+# 全站搜索（配合 hexo-generator-searchdb）
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+# ---------- Deployment ----------
+# 网络和 GitHub 认证就绪后再填 git 那段，先留空不影响本地 generate / server
+deploy:
+  type: ''
