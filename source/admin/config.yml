@@ -6,6 +6,8 @@ backend:
   name: github
   repo: Alexander-ap/Alexander-ap.github.io
   branch: main
+  # 只保留令牌登录：OAuth 需要 Netlify 或自建中转，本站用不到
+  auth_methods: [token]
 
 # 站点信息（CMS 顶部与预览用）
 site_url: https://alexander-ap.github.io
