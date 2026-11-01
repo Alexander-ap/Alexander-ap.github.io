@@ -1,0 +1,15 @@
+# 主题配置
+menu:
+  首页: /
+  标签: /tags/
+  分类: /categories/
+  归档: /archives/
+  写文章: /admin/
+
+# 顶部社交图标：github / mail / rss
+# 想加邮箱就写 mail: "mailto:you@example.com"
+social:
+  github: https://github.com/Alexander-ap
+  rss: /atom.xml
+
+favicon: /images/favicon.svg

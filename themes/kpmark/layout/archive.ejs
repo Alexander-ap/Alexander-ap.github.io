@@ -1,0 +1,15 @@
+---
+layout: base
+---
+<% var list = page.posts || posts; %>
+<section class="taxonomy">
+  <h1><%= page.title || (page.archive ? page.year : '全部文章') %></h1>
+  <ul class="plain-list">
+    <% list.each(function (post) { %>
+      <li>
+        <time datetime="<%- post.date.toISOString() %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </li>
+    <% }); %>
+  </ul>
+</section>

@@ -1,0 +1,51 @@
+---
+layout: base
+---
+<%
+  function makeBrief(post) {
+    var raw = (post.excerpt && post.excerpt.trim().length > 0) ? post.excerpt : (post.content || '');
+    raw = raw
+      .replace(/<pre[\s\S]*?<\/pre>/gi, ' ')
+      .replace(/<figure[\s\S]*?<\/figure>/gi, ' ')
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ');
+    var text = strip_html(raw)
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&quot;|&#34;/g, '"')
+      .replace(/&#39;|&apos;/g, "'")
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return text.length > 150 ? text.slice(0, 150) + '…' : text;
+  }
+%>
+<% var list = page.posts; %>
+<% if (!list || !list.length) { %>
+  <p class="empty">还没有文章。</p>
+<% } else { %>
+  <% list.each(function (post) { %>
+    <% var brief = makeBrief(post); %>
+    <% var minutes = Math.max(1, Math.round(strip_html(post.content || '').length / 300)); %>
+    <article class="card">
+      <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+      <% if (brief) { %><p class="excerpt"><%= brief %></p><% } %>
+      <p class="meta">
+        <time datetime="<%- post.date.toISOString() %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+        <span class="dot">·</span><%= minutes %> 分钟
+        <% if (post.categories && post.categories.length) { %>
+          <span class="dot">·</span><%= post.categories.toArray().map(function (c) { return c.name; }).join('、') %>
+        <% } %>
+      </p>
+    </article>
+  <% }); %>
+
+  <% if (page.total > 1) { %>
+    <nav class="pager">
+      <% if (page.prev) { %><a href="<%- url_for(page.prev_link) %>">← 更新</a><% } %>
+      <span><%= page.current %> / <%= page.total %></span>
+      <% if (page.next) { %><a href="<%- url_for(page.next_link) %>">更早 →</a><% } %>
+    </nav>
+  <% } %>
+<% } %>

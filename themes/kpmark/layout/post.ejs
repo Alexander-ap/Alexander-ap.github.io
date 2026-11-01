@@ -1,0 +1,21 @@
+---
+layout: base
+---
+<article class="post">
+  <h1><%= page.title %></h1>
+  <p class="meta">
+    <time datetime="<%- page.date.toISOString() %>"><%= date(page.date, 'YYYY-MM-DD') %></time>
+    <% if (page.categories && page.categories.length) { %>
+      <span class="dot">·</span><%= page.categories.toArray().map(function (c) { return c.name; }).join('、') %>
+    <% } %>
+    <% if (page.tags && page.tags.length) { %>
+      <span class="dot">·</span><%= page.tags.toArray().map(function (t) { return t.name; }).join('、') %>
+    <% } %>
+  </p>
+  <div class="content"><%- page.content %></div>
+</article>
+
+<nav class="post-nav">
+  <% if (page.next) { %><a href="<%- url_for(page.next.path) %>">← <%= page.next.title %></a><% } %>
+  <% if (page.prev) { %><a class="right" href="<%- url_for(page.prev.path) %>"><%= page.prev.title %> →</a><% } %>
+</nav>

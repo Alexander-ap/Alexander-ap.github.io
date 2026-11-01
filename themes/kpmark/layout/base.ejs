@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <% var siteTitle = config.title || 'Blog'; %>
+  <% var docTitle = (typeof page !== 'undefined' && page && page.title) ? page.title + ' · ' + siteTitle : siteTitle; %>
+  <title><%= docTitle %></title>
+  <% if (config.description) { %><meta name="description" content="<%= config.description %>"><% } %>
+  <link rel="icon" href="<%- url_for(theme.favicon) %>">
+  <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <h1><a href="<%- url_for('/') %>"><%= config.title %></a></h1>
+      <% if (config.subtitle) { %><p class="line"><%= config.subtitle %></p><% } %>
+      <% if (config.description) { %><p class="line"><%= config.description %></p><% } %>
+      <% if (theme.social) { %>
+      <div class="social">
+        <% Object.keys(theme.social).forEach(function (name) { %>
+          <a href="<%- theme.social[name] %>" title="<%= name %>" aria-label="<%= name %>"><%- partial('_partial/icon', { name: name }) %></a>
+        <% }); %>
+      </div>
+      <% } %>
+    </header>
+
+    <nav class="menu">
+      <% Object.keys(theme.menu).forEach(function (label) { %>
+        <a href="<%- url_for(theme.menu[label]) %>"><%= label %></a>
+      <% }); %>
+    </nav>
+
+    <main>
+      <%- body %>
+    </main>
+
+    <footer class="site">
+      <p>© <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>　·　由 <a href="https://hexo.io">Hexo</a> 生成</p>
+    </footer>
+  </div>
+</body>
+</html>
