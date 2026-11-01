@@ -2,20 +2,38 @@
 layout: base
 ---
 <article class="post">
-  <h1><%= page.title %></h1>
-  <p class="meta">
-    <time datetime="<%- page.date.toISOString() %>"><%= date(page.date, 'YYYY-MM-DD') %></time>
-    <% if (page.categories && page.categories.length) { %>
-      <span class="dot">·</span><%= page.categories.toArray().map(function (c) { return c.name; }).join('、') %>
-    <% } %>
-    <% if (page.tags && page.tags.length) { %>
-      <span class="dot">·</span><%= page.tags.toArray().map(function (t) { return t.name; }).join('、') %>
-    <% } %>
-  </p>
-  <div class="content"><%- page.content %></div>
-</article>
+  <a class="back" href="<%- url_for('/') %>"><span>←</span> 返回目录</a>
 
-<nav class="post-nav">
-  <% if (page.next) { %><a href="<%- url_for(page.next.path) %>">← <%= page.next.title %></a><% } %>
-  <% if (page.prev) { %><a class="right" href="<%- url_for(page.prev.path) %>"><%= page.prev.title %> →</a><% } %>
-</nav>
+  <div class="post-meta">
+    <% if (page.categories && page.categories.length) { %>
+      <span class="tag"><%= page.categories.toArray()[0].name %></span>
+    <% } %>
+    <time><%= date(page.date, 'YYYY.MM.DD') %></time>
+    <span class="slash">/</span>
+    <span><%= Math.max(1, Math.round(strip_html(page.content || '').length / 300)) %> 分钟阅读</span>
+  </div>
+
+  <h1 class="post-title"><%= page.title %></h1>
+
+  <div class="content"><%- page.content %></div>
+
+  <div class="signoff">
+    <span>写于 <%= date(page.date, 'YYYY.MM.DD') %><%= theme.city ? ' · ' + theme.city : '' %></span>
+    <span class="thanks">Thanks for reading.</span>
+  </div>
+
+  <div class="post-nav">
+    <% if (page.prev) { %>
+      <a class="nav-card" href="<%- url_for(page.prev.path) %>">
+        <span class="label">← 上一篇</span>
+        <span class="t"><%= page.prev.title %></span>
+      </a>
+    <% } else { %><div></div><% } %>
+    <% if (page.next) { %>
+      <a class="nav-card right" href="<%- url_for(page.next.path) %>">
+        <span class="label">下一篇 →</span>
+        <span class="t"><%= page.next.title %></span>
+      </a>
+    <% } %>
+  </div>
+</article>

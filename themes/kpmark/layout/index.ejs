@@ -4,6 +4,11 @@ layout: base
 <%
   function makeBrief(post) {
     var raw = (post.excerpt && post.excerpt.trim().length > 0) ? post.excerpt : (post.content || '');
+    // 没写 <!-- more --> 时，取到第一个小标题为止，避免把正文结构全吸进摘要
+    if (!post.excerpt || post.excerpt.trim().length === 0) {
+      var cut = raw.search(/<h[2-6][\s>]/i);
+      if (cut > 0) raw = raw.slice(0, cut);
+    }
     raw = raw
       .replace(/<pre[\s\S]*?<\/pre>/gi, ' ')
       .replace(/<figure[\s\S]*?<\/figure>/gi, ' ')
@@ -18,34 +23,60 @@ layout: base
       .replace(/&amp;/g, '&')
       .replace(/\s+/g, ' ')
       .trim();
-    return text.length > 150 ? text.slice(0, 150) + '…' : text;
+    return text.length > 130 ? text.slice(0, 130) + '…' : text;
+  }
+  function readTime(post) {
+    return Math.max(1, Math.round(strip_html(post.content || '').length / 300));
   }
 %>
-<% var list = page.posts; %>
-<% if (!list || !list.length) { %>
-  <p class="empty">还没有文章。</p>
-<% } else { %>
-  <% list.each(function (post) { %>
-    <% var brief = makeBrief(post); %>
-    <% var minutes = Math.max(1, Math.round(strip_html(post.content || '').length / 300)); %>
-    <article class="card">
-      <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
-      <% if (brief) { %><p class="excerpt"><%= brief %></p><% } %>
-      <p class="meta">
-        <time datetime="<%- post.date.toISOString() %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
-        <span class="dot">·</span><%= minutes %> 分钟
-        <% if (post.categories && post.categories.length) { %>
-          <span class="dot">·</span><%= post.categories.toArray().map(function (c) { return c.name; }).join('、') %>
-        <% } %>
-      </p>
+
+<section class="intro">
+  <% if (theme.intro_status) { %>
+    <div class="status"><span class="dot"></span><span><%= theme.intro_status %></span></div>
+  <% } %>
+  <% if (theme.intro_lede) { %>
+    <p class="lede"><%= theme.intro_lede %></p>
+  <% } else if (config.description) { %>
+    <p class="lede"><%= config.description %></p>
+  <% } %>
+
+  <div class="filter-row">
+    <div class="chips">
+      <a class="chip active" href="<%- url_for('/') %>">全部</a>
+      <% site.categories.each(function (cat) { %>
+        <a class="chip" href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+      <% }); %>
+    </div>
+    <span class="note-count"><%= site.posts.length %> notes</span>
+  </div>
+</section>
+
+<section class="post-list">
+  <% page.posts.each(function (post) { %>
+    <% var cat = (post.categories && post.categories.length) ? post.categories.toArray()[0].name : ''; %>
+    <article class="row">
+      <a class="row-inner" href="<%- url_for(post.path) %>">
+        <div class="datecol">
+          <span class="md"><%= date(post.date, 'MM.DD') %></span>
+          <span class="ym"><%= date(post.date, 'YYYY') %><%= cat ? ' · ' + cat : '' %></span>
+        </div>
+        <div class="body">
+          <div class="title-line">
+            <h2><%= post.title %></h2>
+            <span class="read-hint">阅读 →</span>
+          </div>
+          <p class="excerpt"><%= makeBrief(post) %></p>
+          <div class="meta">预计阅读 <%= readTime(post) %> 分钟</div>
+        </div>
+      </a>
     </article>
   <% }); %>
+</section>
 
-  <% if (page.total > 1) { %>
-    <nav class="pager">
-      <% if (page.prev) { %><a href="<%- url_for(page.prev_link) %>">← 更新</a><% } %>
-      <span><%= page.current %> / <%= page.total %></span>
-      <% if (page.next) { %><a href="<%- url_for(page.next_link) %>">更早 →</a><% } %>
-    </nav>
-  <% } %>
+<% if (page.total > 1) { %>
+  <nav class="pager">
+    <% if (page.prev) { %><a href="<%- url_for(page.prev_link) %>">← 更新</a><% } %>
+    <span><%= page.current %> / <%= page.total %></span>
+    <% if (page.next) { %><a href="<%- url_for(page.next_link) %>">更早 →</a><% } %>
+  </nav>
 <% } %>

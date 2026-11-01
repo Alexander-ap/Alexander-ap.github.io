@@ -3,11 +3,11 @@ layout: base
 ---
 <% var list = page.posts || posts; %>
 <section class="taxonomy">
-  <h1>标签：<%= page.tag %></h1>
+  <h1 class="page-title">标签 · <%= page.tag %></h1>
   <ul class="plain-list">
     <% list.each(function (post) { %>
       <li>
-        <time datetime="<%- post.date.toISOString() %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+        <span class="d"><%= date(post.date, 'MM.DD') %></span>
         <a href="<%- url_for(post.path) %>"><%= post.title %></a>
       </li>
     <% }); %>

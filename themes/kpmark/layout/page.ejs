@@ -4,16 +4,17 @@ layout: base
 <% if (page.type === 'tags' || page.type === 'categories') { %>
   <% var items = page.type === 'tags' ? site.tags : site.categories; %>
   <section class="taxonomy">
-    <h1><%= page.title || page.type %></h1>
+    <h1 class="page-title"><%= page.title || page.type %></h1>
     <div class="chips">
       <% items.each(function (item) { %>
-        <a class="chip" href="<%- url_for(item.path) %>"><%= item.name %><span class="count"><%= item.length %></span></a>
+        <a class="chip" href="<%- url_for(item.path) %>"><%= item.name %><span class="n"><%= item.length %></span></a>
       <% }); %>
     </div>
   </section>
 <% } else { %>
-  <article class="post">
-    <h1><%= page.title %></h1>
+  <article class="about-card">
+    <span class="badge">关于作者</span>
+    <h1 class="post-title"><%= page.title %></h1>
     <div class="content"><%- page.content %></div>
   </article>
 <% } %>

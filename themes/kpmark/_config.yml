@@ -1,15 +1,21 @@
-# 主题配置
-menu:
-  首页: /
-  标签: /tags/
-  分类: /categories/
-  归档: /archives/
-  写文章: /admin/
+# 品牌
+avatar_initial: ""            # 头像圆里的字，留空取站点标题首字
+tagline: Personal Journal & Notes   # 站名下的斜体小字
 
-# 顶部社交图标：github / mail / rss
-# 想加邮箱就写 mail: "mailto:you@example.com"
-social:
-  github: https://github.com/Alexander-ap
-  rss: /atom.xml
+# 顶部药丸导航
+nav:
+  - label: 文章
+    url: /
+  - label: 归档
+    url: /archives/
+  - label: 关于我
+    url: /about/
+  - label: 写文章
+    url: /admin/
 
-favicon: /images/favicon.svg
+# 首页引言（留空则不显示）
+intro_status: ""              # 例：近况：在读《枕草子》，听雨，写慢笔记
+intro_lede: "写点日常、读书笔记与偶发的胡思乱想。"   # 占位文案，随时改
+
+# 页脚
+city: ""                      # 例：中国 · 杭州

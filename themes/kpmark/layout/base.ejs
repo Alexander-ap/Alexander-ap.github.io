@@ -7,36 +7,52 @@
   <% var docTitle = (typeof page !== 'undefined' && page && page.title) ? page.title + ' · ' + siteTitle : siteTitle; %>
   <title><%= docTitle %></title>
   <% if (config.description) { %><meta name="description" content="<%= config.description %>"><% } %>
-  <link rel="icon" href="<%- url_for(theme.favicon) %>">
+  <link rel="icon" href="<%- url_for('/images/favicon.svg') %>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
   <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
 </head>
 <body>
-  <div class="wrap">
-    <header class="site">
-      <h1><a href="<%- url_for('/') %>"><%= config.title %></a></h1>
-      <% if (config.subtitle) { %><p class="line"><%= config.subtitle %></p><% } %>
-      <% if (config.description) { %><p class="line"><%= config.description %></p><% } %>
-      <% if (theme.social) { %>
-      <div class="social">
-        <% Object.keys(theme.social).forEach(function (name) { %>
-          <a href="<%- theme.social[name] %>" title="<%= name %>" aria-label="<%= name %>"><%- partial('_partial/icon', { name: name }) %></a>
-        <% }); %>
-      </div>
-      <% } %>
-    </header>
+  <div class="topline"></div>
 
-    <nav class="menu">
-      <% Object.keys(theme.menu).forEach(function (label) { %>
-        <a href="<%- url_for(theme.menu[label]) %>"><%= label %></a>
-      <% }); %>
-    </nav>
+  <div class="wrap">
+    <%
+      var initial = theme.avatar_initial || (siteTitle || 'A').trim().charAt(0);
+      var cur = (typeof page !== 'undefined' && page && page.path) ? page.path : '';
+      function isActive(url) {
+        if (url === '/') return is_home() ? ' active' : '';
+        return cur.indexOf(url.replace(/^\//, '')) === 0 ? ' active' : '';
+      }
+    %>
+    <header class="site">
+      <a class="brand" href="<%- url_for('/') %>">
+        <span class="avatar"><%= initial %></span>
+        <span class="brand-text">
+          <span class="name"><%= siteTitle %><i>.</i></span>
+          <% if (theme.tagline) { %><span class="tagline"><%= theme.tagline %></span><% } %>
+        </span>
+      </a>
+
+      <nav class="pills">
+        <% (theme.nav || []).forEach(function (item) { %>
+          <a class="pill<%= isActive(item.url) %>" href="<%- url_for(item.url) %>"><%= item.label %></a>
+        <% }); %>
+      </nav>
+    </header>
 
     <main>
       <%- body %>
     </main>
 
     <footer class="site">
-      <p>© <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>　·　由 <a href="https://hexo.io">Hexo</a> 生成</p>
+      <div class="foot-left"><span class="dot"></span>© <%= date(new Date(), 'YYYY') %> <%= siteTitle %></div>
+      <div class="foot-right">
+        <a href="<%- url_for('/archives/') %>">归档</a>
+        <a href="<%- url_for('/atom.xml') %>">RSS 订阅</a>
+        <a href="<%- url_for('/about/') %>">写信给我</a>
+      </div>
     </footer>
   </div>
 </body>
