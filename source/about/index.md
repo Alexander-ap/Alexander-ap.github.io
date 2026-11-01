@@ -13,11 +13,11 @@ date: 2026-11-01 18:00:00
 
 <div class="info-grid">
   <div class="info-card">
-    <p class="k">最近在读</p>
-    <p class="v">《枕草子》· 清少纳言</p>
+    <p class="k">最近在做</p>
+    <p class="v">学习</p>
   </div>
   <div class="info-card">
     <p class="k">常驻城市</p>
-    <p class="v">中国 · 杭州</p>
+    <p class="v">中国 · 大连</p>
   </div>
 </div>
