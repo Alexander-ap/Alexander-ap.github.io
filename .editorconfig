@@ -1,5 +1,6 @@
 root = true
 
+# 由 GitHub Actions 构建并部署，见 .github/workflows/pages.yml
 [*]
 charset = utf-8
 end_of_line = lf
