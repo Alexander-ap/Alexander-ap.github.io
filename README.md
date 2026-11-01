@@ -3,9 +3,22 @@
 用 **Hexo 8 + NexT 8** 搭的静态博客，托管在 GitHub Pages。
 
 - 站点：https://alexander-ap.github.io/
+- 后台（写文章）：https://alexander-ap.github.io/admin/
 - 仓库：https://github.com/Alexander-ap/Alexander-ap.github.io
 
-## 写作方式（不用装任何东西）
+## 在博客后台写（推荐）
+
+打开 https://alexander-ap.github.io/admin/ ，首次需要登录一次：
+
+1. 点 **Sign In with Token**
+2. 按弹窗里的链接生成一个 **Fine-grained token**，权限给 `Contents: Read and write`，仓库选 `Alexander-ap.github.io`
+3. 把令牌粘回弹窗 → 登录成功
+
+令牌只存在你的浏览器 localStorage 里，不会上传。之后：**New 文章 → 写标题/日期/标签/正文 → Publish**，保存后约 1 分钟自动发布。
+
+> 令牌是给 CMS 提交内容用的；想换机器或清除，在浏览器里清掉本站 localStorage 即可。
+
+## 写作方式（GitHub 网页，备用）
 
 全部在 GitHub 网页上完成，手机也行：
 

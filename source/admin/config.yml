@@ -1,0 +1,60 @@
+# Sveltia CMS 配置
+# 文档：https://sveltiacms.app/en/docs/backends/github
+# 登录方式：Sign In with Token（粘贴 GitHub 令牌，不需要 OAuth 中转）
+
+backend:
+  name: github
+  repo: Alexander-ap/Alexander-ap.github.io
+  branch: main
+
+# 站点信息（CMS 顶部与预览用）
+site_url: https://alexander-ap.github.io
+display_url: alexander-ap.github.io
+logo_url: https://alexander-ap.github.io/images/favicon.svg
+
+# 简单工作流：保存即提交到 main，触发 Actions 构建
+publish_mode: simple
+
+# 图片上传位置：存进源码目录，构建时随站点发布
+media_folder: source/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    description: 保存后会提交到 main，约 1 分钟后自动发布
+    folder: source/_posts
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    identifier_field: title
+    summary: '{{title}}　·　{{date}}'
+    sortable_fields: [date, title]
+    fields:
+      - name: title
+        label: 标题
+        widget: string
+      - name: date
+        label: 日期与时间
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: 'HH:mm:ss'
+        format: 'YYYY-MM-DD HH:mm:ss'
+      - name: tags
+        label: 标签
+        widget: list
+        required: false
+        default: []
+        hint: 每行一个，留空则不显示标签
+      - name: categories
+        label: 分类
+        widget: list
+        required: false
+        default: []
+        hint: 每行一个，留空则归入「未分类」
+      - name: body
+        label: 正文
+        widget: markdown
