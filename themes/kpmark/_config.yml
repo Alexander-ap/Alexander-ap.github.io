@@ -8,6 +8,10 @@ nav:
     url: /
   - label: 归档
     url: /archives/
+  - label: 标签
+    url: /tags/
+  - label: 分类
+    url: /categories/
   - label: 关于我
     url: /about/
   - label: 写文章

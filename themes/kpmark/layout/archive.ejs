@@ -7,9 +7,10 @@ layout: base
   <ul class="plain-list">
     <% list.each(function (post) { %>
       <li>
-        <span class="d"><%= date(post.date, 'MM.DD') %></span>
+        <span class="d"><%= date(post.date, 'YYYY.MM.DD') %></span>
         <a href="<%- url_for(post.path) %>"><%= post.title %></a>
       </li>
     <% }); %>
   </ul>
+  <%- partial('_partial/pager') %>
 </section>

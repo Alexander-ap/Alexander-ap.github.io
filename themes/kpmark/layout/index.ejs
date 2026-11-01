@@ -1,35 +1,6 @@
 ---
 layout: base
 ---
-<%
-  function plainText(html) {
-    return strip_html(html || '')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&quot;|&#34;/g, '"')
-      .replace(/&#39;|&apos;/g, "'")
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&amp;/g, '&')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-  function makeBrief(post) {
-    var raw = (post.excerpt && post.excerpt.trim().length > 0) ? post.excerpt : (post.content || '');
-    if (!post.excerpt || post.excerpt.trim().length === 0) {
-      var cut = raw.search(/<h[2-6][\s>]/i);
-      if (cut > 0) raw = raw.slice(0, cut);
-    }
-    var text = plainText(raw.replace(/<pre[\s\S]*?<\/pre>/gi, ' ').replace(/<figure[\s\S]*?<\/figure>/gi, ' '));
-    return text.length > 130 ? text.slice(0, 130) + '…' : text;
-  }
-  function readTime(post) {
-    return Math.max(1, Math.round(plainText(post.content).length / 300));
-  }
-  function wordCount(post) {
-    return plainText(post.content).length;
-  }
-%>
-
 <section class="intro">
   <% (theme.intro_lines || []).forEach(function (line) { %>
     <% if (line) { %><p class="line"><%= line %></p><% } %>
@@ -72,18 +43,12 @@ layout: base
             <h2><%= post.title %></h2>
             <span class="read-hint">阅读 →</span>
           </div>
-          <p class="excerpt"><%= makeBrief(post) %></p>
-          <div class="meta"><%= date(post.date, 'YYYY年M月D日') %> · <%= readTime(post) %> 分钟 · <%= wordCount(post) %> 字</div>
+          <p class="excerpt"><%= excerpt_text(post) %></p>
+          <div class="meta"><%= date(post.date, 'YYYY年M月D日') %> · <%= read_time(post) %> 分钟 · <%= word_count(post) %> 字</div>
         </div>
       </a>
     </article>
   <% }); %>
 </section>
 
-<% if (page.total > 1) { %>
-  <nav class="pager">
-    <% if (page.prev) { %><a href="<%- url_for(page.prev_link) %>">← 更新</a><% } %>
-    <span><%= page.current %> / <%= page.total %></span>
-    <% if (page.next) { %><a href="<%- url_for(page.next_link) %>">更早 →</a><% } %>
-  </nav>
-<% } %>
+<%- partial('_partial/pager') %>

@@ -9,7 +9,7 @@ categories:
 
 欢迎来到我的博客。
 
-这是用 **Hexo 8** + **NexT 8** 搭建、准备部署到 GitHub Pages 的第一篇文章。
+这是用 **Hexo 8** + 自建主题 **kpmark** 搭的，托管在 GitHub Pages。
 
 ## 常用命令
 
@@ -23,6 +23,6 @@ hexo deploy             # 部署（配置好 git 之后可用）
 
 ## 接下来
 
-- 在 `_config.yml` 里把 `url` 改成自己的 GitHub Pages 地址
-- 把首页占位文字换成自己的介绍
-- 想加公式就装 `hexo-renderer-markdown-it` + katex，并在文章 front-matter 写 `mathjax: true`
+- 站点地址：https://alexander-ap.github.io
+- 写文章走 `/admin/`，保存后约 1 分钟自动发布
+- 主题在 `themes/kpmark`，视觉都集中在 `theme.css` 一个文件里
