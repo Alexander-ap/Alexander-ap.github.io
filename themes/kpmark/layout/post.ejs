@@ -17,6 +17,14 @@ layout: base
 
   <h1 class="post-title"><%= page.title %></h1>
 
+  <% var tocHtml = toc(page.content, { min_depth: 2, max_depth: 3, list_number: false }); %>
+  <% if (tocHtml) { %>
+    <nav class="toc-card" aria-label="目录">
+      <p class="toc-title">目录</p>
+      <div class="toc-body"><%- tocHtml %></div>
+    </nav>
+  <% } %>
+
   <div class="content"><%- page.content %></div>
 
   <% if (page.tags && page.tags.length) { %>

@@ -52,6 +52,7 @@
 </head>
 <body>
   <div class="topline"></div>
+  <div class="readbar" hidden></div>
 
   <div class="wrap">
     <%
@@ -75,6 +76,8 @@
         <% (theme.nav || []).forEach(function (item) { %>
           <a class="pill<%= isActive(item.url) %>" href="<%- url_for(item.url) %>"><%= item.label %></a>
         <% }); %>
+        <button class="pill pill-search" type="button" data-search-trigger
+                data-src="<%- url_for('/search.xml') %>" hidden>搜索</button>
       </nav>
     </header>
 
@@ -91,5 +94,6 @@
       </div>
     </footer>
   </div>
+  <script src="<%- url_for('/js/theme.js') %>" defer></script>
 </body>
 </html>

@@ -73,8 +73,7 @@ theme: kpmark
 search:
   path: search.xml
   field: post
-  format: html
-  limit: 10000
+  format: striptags
 
 # 站点地图（配合 hexo-generator-sitemap）
 sitemap:

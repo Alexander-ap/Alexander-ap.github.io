@@ -27,6 +27,14 @@ layout: base
     </div>
     <span class="note-count"><%= site.posts.length %> notes</span>
   </div>
+
+  <% if (theme.show_tag_chips !== false && site.tags.length) { %>
+    <div class="chips chips-tags">
+      <% site.tags.sort('length', -1).limit(12).each(function (tag) { %>
+        <a class="chip" href="<%- url_for(tag.path) %>" data-tag="<%= tag.name %>"><%= tag.name %><span class="n"><%= tag.length %></span></a>
+      <% }); %>
+    </div>
+  <% } %>
 </section>
 
 <section class="post-list">
