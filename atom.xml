@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>Alexander</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <id>https://alexander-ap.github.io/</id>
+  <link href="https://alexander-ap.github.io/" rel="alternate"/>
+  <link href="https://alexander-ap.github.io/atom.xml" rel="self"/>
+  <rights>All rights reserved 2026, Alexander</rights>
+  <title>我的博客</title>
+  <updated>2026-11-01T08:44:22.088Z</updated>
+  <entry>
+    <author>
+      <name>Alexander</name>
+    </author>
+    <category term="开始" scheme="https://alexander-ap.github.io/categories/%E5%BC%80%E5%A7%8B/"/>
+    <category term="随笔" scheme="https://alexander-ap.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    <content>
+      <![CDATA[<p>欢迎来到我的博客。</p><p>这是用 <strong>Hexo 8</strong> + <strong>NexT 8</strong> 搭建、准备部署到 GitHub Pages 的第一篇文章。</p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章标题&quot;</span>     <span class="comment"># 新建文章</span></span><br><span class="line">hexo generate           <span class="comment"># 编译成静态文件到 public/</span></span><br><span class="line">hexo server             <span class="comment"># 本地预览 http://localhost:4000</span></span><br><span class="line">hexo clean              <span class="comment"># 清理缓存和 public/</span></span><br><span class="line">hexo deploy             <span class="comment"># 部署（配置好 git 之后可用）</span></span><br></pre></td></tr></table></figure><h2 id="接下来"><a href="#接下来" class="headerlink" title="接下来"></a>接下来</h2><ul><li>在 <code>_config.yml</code> 里把 <code>url</code> 改成自己的 GitHub Pages 地址</li><li>把首页占位文字换成自己的介绍</li><li>想加公式就装 <code>hexo-renderer-markdown-it</code> + katex，并在文章 front-matter 写 <code>mathjax: true</code></li></ul>]]>
+    </content>
+    <id>https://alexander-ap.github.io/2026/11/01/hello-world/</id>
+    <link href="https://alexander-ap.github.io/2026/11/01/hello-world/"/>
+    <published>2026-11-01T08:40:00.000Z</published>
+    <summary>
+      <![CDATA[<p>欢迎来到我的博客。</p>
+<p>这是用 <strong>Hexo 8</strong> + <strong>NexT 8</strong> 搭建、准备部署到 GitHub Pages 的第一篇文章。</p>
+<h2 id="常用命令"><a href="#常用命令" cl]]>
+    </summary>
+    <title>Hello World</title>
+    <updated>2026-11-01T08:44:22.088Z</updated>
+  </entry>
+</feed>

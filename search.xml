@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2026/11/01/hello-world/</url>
+    <content><![CDATA[<p>欢迎来到我的博客。</p>
+<p>这是用 <strong>Hexo 8</strong> + <strong>NexT 8</strong> 搭建、准备部署到 GitHub Pages 的第一篇文章。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章标题&quot;</span>     <span class="comment"># 新建文章</span></span><br><span class="line">hexo generate           <span class="comment"># 编译成静态文件到 public/</span></span><br><span class="line">hexo server             <span class="comment"># 本地预览 http://localhost:4000</span></span><br><span class="line">hexo clean              <span class="comment"># 清理缓存和 public/</span></span><br><span class="line">hexo deploy             <span class="comment"># 部署（配置好 git 之后可用）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="接下来"><a href="#接下来" class="headerlink" title="接下来"></a>接下来</h2><ul>
+<li>在 <code>_config.yml</code> 里把 <code>url</code> 改成自己的 GitHub Pages 地址</li>
+<li>把首页占位文字换成自己的介绍</li>
+<li>想加公式就装 <code>hexo-renderer-markdown-it</code> + katex，并在文章 front-matter 写 <code>mathjax: true</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>开始</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+</search>
