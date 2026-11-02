@@ -25,13 +25,13 @@ collections:
   - name: posts
     label: 文章
     label_singular: 文章
-    description: 保存后会提交到 main，约 1 分钟后自动发布
+    description: 保存后会提交到 main，约 1 分钟后自动发布。文件名取自标题，会成为 URL 的一部分；如需英文 URL，保存后改文件名即可
     folder: source/_posts
     create: true
     delete: true
     extension: md
     format: frontmatter
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     identifier_field: title
     summary: '{{title}}　·　{{date}}'
     sortable_fields: [date, title]
@@ -67,6 +67,12 @@ collections:
         widget: boolean
         default: true
         required: false
+      - name: top
+        label: 置顶到首页
+        widget: boolean
+        default: false
+        required: false
+        hint: 勾选后文章会固定显示在首页列表最上方，带「置顶」标记
       - name: body
         label: 正文
         widget: markdown

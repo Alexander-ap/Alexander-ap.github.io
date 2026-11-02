@@ -243,6 +243,17 @@
         if (!layer || layer.hidden) return;
 
         if (e.key === 'Escape') { e.preventDefault(); close(); }
+        else if (e.key === 'Tab') {
+          // 焦点陷阱：Tab 不跑出浮层
+          var focusables = $$('input, a[href], button', layer).filter(function (el) {
+            return !el.disabled && el.offsetParent !== null;
+          });
+          if (!focusables.length) { e.preventDefault(); return; }
+          var first = focusables[0], last = focusables[focusables.length - 1];
+          if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+          else if (!layer.contains(doc.activeElement)) { e.preventDefault(); first.focus(); }
+        }
         else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIndex + 1); }
         else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIndex - 1); }
         else if (e.key === 'Enter') {

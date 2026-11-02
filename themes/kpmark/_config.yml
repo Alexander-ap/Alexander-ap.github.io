@@ -4,7 +4,7 @@ tagline: 笔记、杂谈和碎碎念      # 站名下的斜体小字
 
 # 静态资源版本号：每次改 theme.css / theme.js 后 +1
 # GitHub Pages 有 CDN 缓存，不换版本号访客可能看到旧样式
-asset_version: 2
+asset_version: 3
 
 # 顶部药丸导航
 nav:
@@ -16,6 +16,8 @@ nav:
     url: /tags/
   - label: 分类
     url: /categories/
+  - label: 留言
+    url: /guestbook/
   - label: 关于我
     url: /about/
   - label: 写文章
@@ -29,8 +31,17 @@ intro_lines:
 # 社交图标：github / mail / rss（留空则不显示该项）
 social:
   github: https://github.com/Alexander-ap
-  mail: ""
+  mail: "mailto:1713698517@qq.com"
   rss: /atom.xml
+
+# 联系方式（页脚「写信给我」与关于页共用）
+contact:
+  email: 1713698517@qq.com
+
+# 访问统计：不蒜子（唯一第三方脚本，无 Cookie，数据公开）
+# 设为 false 即整块不注入
+analytics:
+  busuanzi: true
 
 # 首页是否显示分类标签
 show_category_chips: true

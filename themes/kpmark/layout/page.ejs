@@ -5,16 +5,37 @@ layout: base
   <% var items = page.type === 'tags' ? site.tags : site.categories; %>
   <section class="taxonomy">
     <h1 class="page-title"><%= page.title || page.type %></h1>
+    <% if (page.type === 'tags') { %>
+      <%- partial('_partial/tagcloud') %>
+    <% } else { %>
     <div class="chips">
       <% items.each(function (item) { %>
         <a class="chip" href="<%- url_for(item.path) %>"><%= item.name %><span class="n"><%= item.length %></span></a>
       <% }); %>
     </div>
+    <% } %>
   </section>
 <% } else { %>
   <article class="about-card">
-    <span class="badge">关于作者</span>
+    <% if (page.badge !== false) { %>
+      <span class="badge"><%= page.badge || '关于作者' %></span>
+    <% } %>
     <h1 class="post-title"><%= page.title %></h1>
     <div class="content"><%- page.content %></div>
+    <%
+      var g = theme.giscus || {};
+      var showComments = page.comments !== false && g.repo_id && g.category_id;
+    %>
+    <% if (showComments) { %>
+      <div class="giscus-slot"
+           data-repo="<%= g.repo %>"
+           data-repo-id="<%= g.repo_id %>"
+           data-category="<%= g.category %>"
+           data-category-id="<%= g.category_id %>"
+           data-mapping="<%= g.mapping || 'pathname' %>"
+           data-reactions="<%= g.reactions || '1' %>"
+           data-theme="<%= /^https?:/.test(g.theme) ? g.theme : full_url_for(g.theme) %>"
+           data-lang="<%= g.lang || 'zh-CN' %>"></div>
+    <% } %>
   </article>
 <% } %>

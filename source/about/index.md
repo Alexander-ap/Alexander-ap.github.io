@@ -18,4 +18,10 @@ date: 2026-11-01 18:00:00
     <p class="k">常驻城市</p>
     <p class="v">中国 · 大连</p>
   </div>
+  <div class="info-card">
+    <p class="k">联系邮箱</p>
+    <p class="v"><a href="mailto:1713698517@qq.com">1713698517@qq.com</a></p>
+  </div>
 </div>
+
+如果你有想聊的话题，或者发现了页面上的错误，欢迎给我发邮件。

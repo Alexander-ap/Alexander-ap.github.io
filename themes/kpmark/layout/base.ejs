@@ -18,7 +18,8 @@
     var seoUrl = full_url_for(page.path).replace(/index\.html$/, '');
   %>
   <link rel="canonical" href="<%= seoUrl %>">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="robots" content="<%= (page && page.robots) || 'index,follow,max-image-preview:large' %>">
+  <link rel="alternate" type="application/atom+xml" title="<%= siteTitle %> · RSS" href="<%- url_for('/atom.xml') %>">
   <%- open_graph({
         url: seoUrl,
         description: seoDesc,
@@ -26,10 +27,8 @@
         twitter_card: 'summary'
       }) %>
   <link rel="icon" href="<%- url_for('/images/favicon.svg') %>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" media="print" onload="this.media='all'"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="<%- url_for('/fonts/cormorant-garamond-latin-600-normal.woff2') %>?v=<%= assetVer %>">
   <link rel="stylesheet" href="<%- url_for('/css/theme.css') %>?v=<%= assetVer %>">
   <% if (is_post()) { %>
   <script type="application/ld+json">
@@ -52,6 +51,7 @@
   <% } %>
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到正文</a>
   <div class="topline"></div>
   <div class="readbar" hidden></div>
 
@@ -82,19 +82,26 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <%- body %>
     </main>
 
     <footer class="site">
-      <div class="foot-left"><span class="dot"></span>© <%= date(new Date(), 'YYYY') %> <%= siteTitle %></div>
+      <div class="foot-left"><span class="dot"></span>© <%= date(new Date(), 'YYYY') %> <%= siteTitle %>
+        <% if (theme.analytics && theme.analytics.busuanzi) { %>
+          <span class="foot-stat" id="busuanzi_container_site_pv">访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+        <% } %>
+      </div>
       <div class="foot-right">
         <a href="<%- url_for('/archives/') %>">归档</a>
         <a href="<%- url_for('/atom.xml') %>">RSS 订阅</a>
-        <a href="<%- url_for('/about/') %>">写信给我</a>
+        <a href="<%= (theme.contact && theme.contact.email) ? 'mailto:' + theme.contact.email : url_for('/about/') %>">写信给我</a>
       </div>
     </footer>
   </div>
+  <% if (theme.analytics && theme.analytics.busuanzi) { %>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <% } %>
   <script src="<%- url_for('/js/theme.js') %>?v=<%= assetVer %>" defer></script>
 </body>
 </html>
