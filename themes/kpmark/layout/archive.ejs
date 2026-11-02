@@ -5,9 +5,14 @@ layout: base
 <section class="taxonomy">
   <h1 class="page-title"><%= page.title || (page.year ? page.year + ' 年' : '归档') %></h1>
   <ul class="plain-list">
+    <% var lastYear = null; %>
     <% list.each(function (post) { %>
+      <% var y = date(post.date, 'YYYY'); %>
+      <% if (y !== lastYear) { lastYear = y; %>
+        <li class="year-head"><h2><%= y %></h2></li>
+      <% } %>
       <li>
-        <span class="d"><%= date(post.date, 'YYYY.MM.DD') %></span>
+        <span class="d"><%= date(post.date, 'MM.DD') %></span>
         <a href="<%- url_for(post.path) %>"><%= post.title %></a>
       </li>
     <% }); %>

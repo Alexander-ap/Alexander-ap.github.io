@@ -18,6 +18,8 @@
 
 令牌只存在浏览器 localStorage 里，不会上传到任何地方。之后：**New 文章 → 填标题/日期/标签/正文 → Publish**，保存后约 1 分钟自动发布。
 
+文件名取自标题（不带日期前缀），会成为 URL 的一部分。比如标题「我的第一篇」会生成 `/2026/11/02/我的第一篇/`。想用英文 URL，保存后到 GitHub 改文件名即可。
+
 > 想换机器或撤销授权，在浏览器里清掉本站 localStorage，并到 GitHub 设置里删掉那个 token 即可。
 
 ## 写作方式二：GitHub 网页，备用
@@ -93,7 +95,11 @@ nav:                        # 顶部药丸导航
     url: /
 social:                     # 留空则不显示该项
   github: https://github.com/Alexander-ap
-  mail: ""
+  mail: "mailto:you@example.com"
+contact:                    # 页脚「写信给我」与关于页共用
+  email: you@example.com
+analytics:                  # 不蒜子访问统计
+  busuanzi: true
 city: 大连                  # 文章末尾「写于 2026.11.01 · 大连」
 ```
 
@@ -103,7 +109,7 @@ city: 大连                  # 文章末尾「写于 2026.11.01 · 大连」
 
 ## 已实现的功能
 
-- **站内搜索**：点导航「搜索」，或按 `/`、`Ctrl/Cmd + K`。支持 ↑↓ 选择、Enter 打开、Esc 关闭
+- **站内搜索**：点导航「搜索」，或按 `/`、`Ctrl/Cmd + K`。支持 ↑↓ 选择、Enter 打开、Esc 关闭、Tab 焦点陷阱
 - **文章目录**：正文上方，随滚动高亮当前小节
 - **代码块**：语言标签 + 复制按钮，带语法配色
 - **图片灯箱**：点击正文图片放大，Esc 关闭
@@ -111,6 +117,14 @@ city: 大连                  # 文章末尾「写于 2026.11.01 · 大连」
 - **相关文章**：按共享标签与分类推荐 3 篇，无相关则不显示
 - **首页标签筛选**：点标签直接搜全站同名文章，能跨分页
 - **SEO**：meta description、Open Graph、canonical、JSON-LD、sitemap.xml、robots.txt
+- **字体**：拉丁用自托管 Cormorant Garamond（3 个 woff2 共 70KB），中文用系统字体栈，零外部请求国内秒开
+- **404 页**：自定义 404（带搜索按钮），`robots: noindex`
+- **留言板**：`/guestbook/` 独立页 + giscus 评论区（需先开启 giscus）
+- **归档年份分组**：`/archives/` 按年份归组，带年份标题
+- **标签云**：`/tags/` 页按文章频次变字号
+- **置顶文章**：front-matter 加 `top: true`，首页第 1 页固定显示并带「置顶」标记
+- **访问统计**：不蒜子 PV（唯一第三方脚本，无 Cookie），可在配置中关掉
+- **联系邮箱**：页脚「写信给我」、社交图标、关于页三处均可点击 mailto
 
 全部为原生实现，主题只加载一个约 14KB 的 `js/theme.js`，没有第三方库。
 

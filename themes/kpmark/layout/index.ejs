@@ -38,7 +38,38 @@ layout: base
 </section>
 
 <section class="post-list">
+  <% /* 置顶文章：仅首页第 1 页显示 */ %>
+  <% if (page.current === 1) { %>
+    <%
+      var pinned = [];
+      page.posts.each(function (p) { if (p.top) pinned.push(p); });
+    %>
+    <% if (pinned.length) { %>
+      <div class="pinned-group">
+        <% pinned.forEach(function (post) { %>
+          <article class="row">
+            <a class="row-inner" href="<%- url_for(post.path) %>">
+              <div class="datecol">
+                <span class="md"><%= date(post.date, 'MM.DD') %></span>
+                <span class="ym"><%= date(post.date, 'YYYY') %></span>
+              </div>
+              <div class="body">
+                <div class="title-line">
+                  <span class="pin-badge">置顶</span>
+                  <h2><%= post.title %></h2>
+                  <span class="read-hint">阅读 →</span>
+                </div>
+                <p class="excerpt"><%= excerpt_text(post) %></p>
+                <div class="meta"><%= date(post.date, 'YYYY年M月D日') %> · <%= read_time(post) %> 分钟 · <%= word_count(post) %> 字</div>
+              </div>
+            </a>
+          </article>
+        <% }); %>
+      </div>
+    <% } %>
+  <% } %>
   <% page.posts.each(function (post) { %>
+    <% if (post.top && page.current === 1) return; /* 置顶文已单独渲染，避免重复 */ %>
     <% var cat = (post.categories && post.categories.length) ? post.categories.toArray()[0].name : ''; %>
     <article class="row">
       <a class="row-inner" href="<%- url_for(post.path) %>">

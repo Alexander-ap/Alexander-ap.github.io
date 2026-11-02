@@ -1,0 +1,18 @@
+<%# 标签云 partial：按文章数定字号 %>
+<%
+  var tags = site.tags.sort('length', -1).toArray();
+  if (tags.length) {
+    var maxLen = tags[0].length || 1;
+    var minLen = tags[tags.length - 1].length || 1;
+%>
+  <div class="tagcloud">
+    <% tags.forEach(function (tag) { %>
+      <%
+        var ratio = maxLen === minLen ? 0.5 : (tag.length - minLen) / (maxLen - minLen);
+        var size = (13 + ratio * 8).toFixed(1); // 13px ~ 21px
+      %>
+      <a class="tagcloud-item" href="<%- url_for(tag.path) %>"
+         style="font-size: <%= size %>px"><%= tag.name %><sup><%= tag.length %></sup></a>
+    <% }); %>
+  </div>
+<% } %>
