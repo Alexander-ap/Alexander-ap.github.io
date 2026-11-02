@@ -4,7 +4,7 @@ tagline: 笔记、杂谈和碎碎念      # 站名下的斜体小字
 
 # 静态资源版本号：每次改 theme.css / theme.js 后 +1
 # GitHub Pages 有 CDN 缓存，不换版本号访客可能看到旧样式
-asset_version: 3
+asset_version: 4
 
 # 顶部药丸导航
 nav:
@@ -64,3 +64,14 @@ giscus:
   reactions: '1'
   theme: /css/giscus-paper.css   # 指向本地暖纸配色；以 / 开头会自动转成绝对地址
   lang: zh-CN
+
+# 打赏（放好 QR 图后设 enabled: true）
+donate:
+  enabled: false
+  wechat_qr: /images/donate-wechat.png    # 把图放 source/images/
+  alipay_qr: /images/donate-alipay.png
+
+# 邮件订阅（Buttondown，到 buttondown.email 注册拿 username）
+newsletter:
+  enabled: false
+  buttondown: ''      # 填你的 username，如 mushin-yuwen

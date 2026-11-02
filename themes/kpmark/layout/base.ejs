@@ -26,13 +26,20 @@
         type: is_post() ? 'article' : 'website',
         twitter_card: 'summary'
       }) %>
+  <%
+    var ogSlug = is_post()
+      ? (page.slug || page.path.replace(/\/$/, '').split('/').pop())
+      : 'default';
+  %>
+  <meta property="og:image" content="<%= full_url_for('/images/og/' + ogSlug + '.png') %>">
+  <meta name="twitter:image" content="<%= full_url_for('/images/og/' + ogSlug + '.png') %>">
   <link rel="icon" href="<%- url_for('/images/favicon.svg') %>">
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="<%- url_for('/fonts/cormorant-garamond-latin-600-normal.woff2') %>?v=<%= assetVer %>">
   <link rel="stylesheet" href="<%- url_for('/css/theme.css') %>?v=<%= assetVer %>">
   <% if (is_post()) { %>
   <script type="application/ld+json">
-  <%- JSON.stringify({
+  <%- JSON.stringify([{
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: page.title,
@@ -46,7 +53,14 @@
         keywords: (page.tags && page.tags.length)
           ? page.tags.toArray().map(function (t) { return t.name; }).join(',')
           : ''
-      }).replace(/<\//g, '<\\/') %>
+      }, {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '首页', item: full_url_for('/') },
+          { '@type': 'ListItem', position: 2, name: page.title, item: seoUrl }
+        ]
+      }]).replace(/<\//g, '<\\/') %>
   </script>
   <% } %>
 </head>
@@ -89,7 +103,7 @@
     <footer class="site">
       <div class="foot-left"><span class="dot"></span>© <%= date(new Date(), 'YYYY') %> <%= siteTitle %>
         <% if (theme.analytics && theme.analytics.busuanzi) { %>
-          <span class="foot-stat" id="busuanzi_container_site_pv">访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+          <span class="foot-stat"><span id="busuanzi_container_site_pv">访问 <span id="busuanzi_value_site_pv"></span> 次</span> · <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv"></span> 人</span></span>
         <% } %>
       </div>
       <div class="foot-right">

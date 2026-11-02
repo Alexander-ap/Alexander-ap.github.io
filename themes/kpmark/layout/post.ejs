@@ -47,6 +47,30 @@ layout: base
     </div>
   <% } %>
 
+  <% if (theme.donate && theme.donate.enabled && (theme.donate.wechat_qr || theme.donate.alipay_qr)) { %>
+    <details class="donate">
+      <summary>💰 赞赏支持</summary>
+      <div class="donate-body">
+        <% if (theme.donate.wechat_qr) { %>
+          <figure><img src="<%- url_for(theme.donate.wechat_qr) %>" alt="微信赞赏"><figcaption>微信</figcaption></figure>
+        <% } %>
+        <% if (theme.donate.alipay_qr) { %>
+          <figure><img src="<%- url_for(theme.donate.alipay_qr) %>" alt="支付宝赞赏"><figcaption>支付宝</figcaption></figure>
+        <% } %>
+      </div>
+    </details>
+  <% } %>
+
+  <% if (theme.newsletter && theme.newsletter.enabled && theme.newsletter.buttondown) { %>
+    <div class="subscribe-card">
+      <p>📬 喜欢这篇文章？订阅邮件更新，新文发布时通知你。</p>
+      <form class="subscribe-form" action="https://buttondown.email/api/emails/embed-subscribe/<%= theme.newsletter.buttondown %>" method="post">
+        <input type="email" name="email" placeholder="你的邮箱" required>
+        <button type="submit">订阅</button>
+      </form>
+    </div>
+  <% } %>
+
   <div class="post-nav">
     <% if (page.prev) { %>
       <a class="nav-card" href="<%- url_for(page.prev.path) %>">

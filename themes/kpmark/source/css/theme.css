@@ -1203,3 +1203,54 @@ body.is-locked { overflow: hidden; }
   line-height: 1.5;
   vertical-align: middle;
 }
+
+/* ---------- 脚注 ---------- */
+.fnref {
+  font-size: 11px;
+  vertical-align: super;
+  line-height: 0;
+}
+.fnref a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.fnref a:hover { text-decoration: underline; }
+
+.footnotes {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.footnotes ol { margin: 0; padding-left: 20px; }
+.footnotes li { margin-bottom: 6px; }
+.footnotes li p { margin: 0; }
+.fn-back {
+  color: var(--accent);
+  text-decoration: none;
+  margin-left: 2px;
+}
+
+
+/* ---------- 代码行高亮 ---------- */
+.content pre .line.hl-line {
+  background: rgba(240, 90, 50, 0.1);
+  border-left: 3px solid var(--accent);
+  margin-left: -16px;
+  padding-left: 13px;
+  display: inline-block;
+  width: calc(100% + 29px);
+  box-sizing: border-box;
+}
+
+/* 隐藏代码块 figcaption 中的行号标记 {1,3} */
+.content figure.highlight figcaption span {
+  display: none;
+}
+.content figure.highlight figcaption:empty,
+.content figure.highlight figcaption:has(span:only-child) {
+  display: none;
+}
